@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Golf Predictor</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e9ecef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #343a40;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 15px;
+            font-weight: 500;
+            color: #495057;
+        }
+
+        select, button {
+            margin-top: 8px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        select:focus, button:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+        }
+
+        button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 18px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .result {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .result h2 {
+            font-size: 20px;
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 100%;
+                padding: 15px;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Golf Play Predictor</h1>
+        <form action="/predict" method="post">
+            <label for="outlook">Outlook:</label>
+            <select id="outlook" name="outlook">
+                <option value="Rainy">Rainy</option>
+                <option value="Overcast">Overcast</option>
+                <option value="Sunny">Sunny</option>
+            </select>
+
+            <label for="temp">Temperature:</label>
+            <select id="temp" name="temp">
+                <option value="Hot">Hot</option>
+                <option value="Mild">Mild</option>
+                <option value="Cool">Cool</option>
+            </select>
+
+            <label for="humidity">Humidity:</label>
+            <select id="humidity" name="humidity">
+                <option value="High">High</option>
+                <option value="Normal">Normal</option>
+            </select>
+
+            <label for="windy">Windy:</label>
+            <select id="windy" name="windy">
+                <option value="True">True</option>
+                <option value="False">False</option>
+            </select>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        <div class="result">
+            {% if prediction is not none %}
+                <h2>Prediction: {{ prediction }}</h2>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
